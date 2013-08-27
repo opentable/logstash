@@ -69,8 +69,8 @@ class LogStash::Inputs::Gelf < LogStash::Inputs::Base
     @logger.info("Starting gelf listener", :address => "#{@host}:#{@port}")
 
     if @udp 
-      @udp.close_read
-      @udp.close_write
+      @udp.close_read  rescue nil
+      @udp.close_write rescue nil
     end
 
     @udp = UDPSocket.new(Socket::AF_INET)
